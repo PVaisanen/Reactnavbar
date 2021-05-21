@@ -1,22 +1,21 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Table from 'react-bootstrap/Table'
+import Modal from "react-modal";
+import { styleModal } from '../styles/SearchUser.styles.css';
 
 import DataFetching from './Datafetching'
 
 
 function SearchUser () {
     const [posts, setposts] = useState([])
-    const [name, setName] = useState('')
+    const [user, setUser] = useState([])
     const [url, setUrl] = useState('https://jsonplaceholder.typicode.com/users/')
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-
-        // axios.get('https://jsonplaceholder.typicode.com/users')
         axios.get(url)
         .then(res => {
-       //     console.log(res)
-            console.log(name);
             setposts(res.data)
         })
         .catch(err => {
@@ -26,22 +25,19 @@ function SearchUser () {
 
   
     const handleChange = (event) => {
-        setName(event.target.value);
+        // setName(event.target.value);
         console.log(event.target.value);
       }
  
-
     function handleClick() {
-        console.log(name);
-        setUrl('https://jsonplaceholder.typicode.com/users/'+ name);
-        
+        console.log(user);
+        setUrl('https://jsonplaceholder.typicode.com/users/');
       }
-
-      
-    function infoClick(id) {
+  
+    function toggleModal(id) {
+        setUser(id)
         console.log(id);
-        
-     //   setUrl('https://jsonplaceholder.typicode.com/users/'+ name);
+        setIsOpen(!isOpen);
       }
 
     return(
@@ -55,7 +51,7 @@ function SearchUser () {
                     </div>
                 </div>
             </div>
-          
+                  
             <br/>
 
             <div>
@@ -69,7 +65,6 @@ function SearchUser () {
                         <th>Phone</th>
                         <th>Addess</th>
                         <th>More</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -82,14 +77,36 @@ function SearchUser () {
                         <td key={post.id}>{post.phone}</td>
                         <td key={post.id}>{post.address.street}, {post.address.city} </td>
                         <td>
-                            <button type="button" class="btn btn-info btn-sm" onClick={() => infoClick(post.id)} >Info</button>
-                        </td>
-                        
+                            <button type="button" class="btn btn-info btn-sm" onClick={() => toggleModal(post)} >Info</button>
+                        </td>         
                     </tr>) }
                 </tbody>
                 </Table>
-           </div>     
-
+               
+                <Modal tabindex="-1"
+                    isOpen={isOpen}
+                    onRequestClose={toggleModal}
+                    contentLabel="User information"
+                    className="w3-modal w3-animate-opacity"
+                    overlayClassName="">
+                    
+                    <div class="modal-dialog">
+                     <div class="modal-content  w3-card-4">
+                            <div class="modal-header w3-teal">
+                                <h5 class="modal-title">{user.name}</h5>
+                            </div>
+                        <div class="w3-container">
+                            <h6 class="modal-title">Username {user.username}</h6>
+                            <h6 class="modal-title">Email {user.email}</h6>
+                            <h6 class="modal-title">Phone {user.phone}</h6>
+                        </div>
+                        <div class="modal-footer w3-teal">
+                            <button type="button" onClick={toggleModal} class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                    </div>
+                </Modal>  
+            </div>   
         </div>
 
     )

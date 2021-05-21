@@ -9,7 +9,7 @@ const NavBar = () => {
     return(
         <div className="App">
     <ReactBootStrap.Navbar collapseOnSelect expand="xl" bg="dark" variant="dark">
-  <ReactBootStrap.Navbar.Brand href="#home">Customer product tracking</ReactBootStrap.Navbar.Brand>
+  <ReactBootStrap.Navbar.Brand href="#home">Management tool</ReactBootStrap.Navbar.Brand>
   <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
     <ReactBootStrap.Nav className="mr-auto"> 
@@ -17,10 +17,10 @@ const NavBar = () => {
     <ReactBootStrap.Nav.Link href="#searchUser">Search user</ReactBootStrap.Nav.Link>
     </Link>
     <Link to="/pricing">
-    <ReactBootStrap.Nav.Link href="#pricing">Create xml</ReactBootStrap.Nav.Link>
+    <ReactBootStrap.Nav.Link href="#pricing">Add User</ReactBootStrap.Nav.Link>
     </Link>
       <ReactBootStrap.NavDropdown title="More" id="collasible-nav-dropdown">
-        <ReactBootStrap.NavDropdown.Item href="#action/3.1">Sender</ReactBootStrap.NavDropdown.Item>
+        <ReactBootStrap.NavDropdown.Item href="#action/3.1">Users</ReactBootStrap.NavDropdown.Item>
         <ReactBootStrap.NavDropdown.Item href="#action/3.2">Customers</ReactBootStrap.NavDropdown.Item>
         <ReactBootStrap.NavDropdown.Divider />
         <ReactBootStrap.NavDropdown.Item href="#action/3.4">About</ReactBootStrap.NavDropdown.Item>
